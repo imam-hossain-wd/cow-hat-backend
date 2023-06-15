@@ -1,6 +1,5 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { userService } from './user.service';
-import { errorlogger } from '../../../shared/logger';
 import { IUser } from './user.interface';
 import httpStatus from 'http-status';
 import sendResponse from '../../../shared/sendResponse';
@@ -8,7 +7,7 @@ import sendResponse from '../../../shared/sendResponse';
 
 
 
-const createUser = async (req: Request, res: Response) => {
+const createUser = async (req: Request, res: Response,next:NextFunction) => {
   try {
     const user = req.body;
     const result = await userService.createUser(user);
@@ -20,11 +19,11 @@ const createUser = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    errorlogger.error(error);
+    next(error)
   }
 };
 
-const getAllUsers = async (req: Request, res: Response) => {
+const getAllUsers = async (req: Request, res: Response, next:NextFunction) => {
   try {
     const result = await userService.getAllUsers();
 
@@ -36,7 +35,7 @@ const getAllUsers = async (req: Request, res: Response) => {
     });
     
   } catch (error) {
-    errorlogger.error(error);
+    next(error)
   }
 };
 
