@@ -1,0 +1,25 @@
+{
+  "name": "cow-hut-backend-assignment-3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Programming-Hero-Web-Course4/l2a3-cow-hut-backend-assignment-imam-hossain1.git",
+  "author": "imam-hossain <zunayedemon6t9@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/http-status": "^1.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.1.4",
+    "express": "^4.18.2",
+    "mongodb": "^5.6.0",
+    "mongoose": "^7.3.0",
+    "typescript": "^5.1.3"
+  },
+  "scripts": {
+    "start": "ts-node-dev --respawn --transpile-only src/server.ts"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0"
+  }
+}
