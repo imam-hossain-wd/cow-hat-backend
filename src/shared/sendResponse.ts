@@ -1,7 +1,7 @@
 
 import { Response } from 'express';
 
-type IApiReponse<T> = {
+export type IApiReponse<T> = {
   statusCode: number;
   success: boolean;
   message?: string | null;

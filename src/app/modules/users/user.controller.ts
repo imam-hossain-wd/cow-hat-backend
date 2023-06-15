@@ -7,6 +7,7 @@ import sendResponse from '../../../shared/sendResponse';
 
 
 
+
 const createUser = async (req: Request, res: Response) => {
   try {
     const user = req.body;
@@ -23,8 +24,24 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
+const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const result = await userService.getAllUsers();
+
+    sendResponse<IUser[]>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "get all users successfully",
+      data: result,
+    });
+    
+  } catch (error) {
+    errorlogger.error(error);
+  }
+};
 
 
 export const userController = {
   createUser,
+  getAllUsers
 };

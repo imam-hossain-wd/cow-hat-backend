@@ -8,7 +8,13 @@ const createUser = async (user: IUser): Promise<IUser | null> => {
     return createdUser;
 };
 
+const getAllUsers = async ()=>{
+  const allUsers = await User.find({});
+  return allUsers;
+}
+
   export const userService ={
-    createUser
+    createUser,
+    getAllUsers
 
   }
