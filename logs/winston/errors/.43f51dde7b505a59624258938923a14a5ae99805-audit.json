@@ -1,20 +1,20 @@
 {
-    "keep": {
-        "days": true,
-        "amount": 14
+  "keep": {
+    "days": true,
+    "amount": 14
+  },
+  "auditLog": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\.43f51dde7b505a59624258938923a14a5ae99805-audit.json",
+  "files": [
+    {
+      "date": 1686844764210,
+      "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\caw-hat-2023-15-06-21-error.log",
+      "hash": "1aef478ee597cad154ec838ff8da3577f34b34f398130fd6636b7b023cc2c441"
     },
-    "auditLog": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\.43f51dde7b505a59624258938923a14a5ae99805-audit.json",
-    "files": [
-        {
-            "date": 1686844764210,
-            "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\caw-hat-2023-15-06-21-error.log",
-            "hash": "1aef478ee597cad154ec838ff8da3577f34b34f398130fd6636b7b023cc2c441"
-        },
-        {
-            "date": 1686844812158,
-            "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\caw-hat-2023-15-06-22-error.log",
-            "hash": "93ca79c7c75911785c5ca1a86cb2e80845912f841d962e7af4f36d5ffef52b64"
-        }
-    ],
-    "hashType": "sha256"
+    {
+      "date": 1686844812158,
+      "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\caw-hat-2023-15-06-22-error.log",
+      "hash": "93ca79c7c75911785c5ca1a86cb2e80845912f841d962e7af4f36d5ffef52b64"
+    }
+  ],
+  "hashType": "sha256"
 }
