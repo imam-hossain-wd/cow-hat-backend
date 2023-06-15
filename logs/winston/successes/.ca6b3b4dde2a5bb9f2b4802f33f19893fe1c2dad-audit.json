@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\successes\\.ca6b3b4dde2a5bb9f2b4802f33f19893fe1c2dad-audit.json",
+    "files": [
+        {
+            "date": 1686844764204,
+            "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\successes\\caw-hat-2023-15-06-21-success.log",
+            "hash": "bca4a0c4d7e23f48b0efdb25416c068176dabf2beac783a6c9c335dfa30db2df"
+        },
+        {
+            "date": 1686844812153,
+            "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\successes\\caw-hat-2023-15-06-22-success.log",
+            "hash": "32731e5d3e95b22827bfd193d8d35907b50f7a5962f43dafd40b734afbcb7658"
+        }
+    ],
+    "hashType": "sha256"
+}
