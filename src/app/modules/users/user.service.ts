@@ -13,8 +13,14 @@ const getAllUsers = async ()=>{
   return allUsers;
 }
 
+const getSingleUser = async (id:string): Promise<IUser | null> =>{
+  const singleUser = await User.findOne({ _id: id});
+  return singleUser;
+}
+
   export const userService ={
     createUser,
-    getAllUsers
+    getAllUsers,
+    getSingleUser
 
   }

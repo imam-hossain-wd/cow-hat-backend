@@ -1,21 +1,14 @@
 
-
-export enum Role {
-    Seller = 'seller',
-    Buyer = 'buyer',
-  }
-  
 export type IUser = {
-    _id: string;
-    phoneNumber: string;
-    role: Role;
-    password: string;
-    name: string;
+  // _id: string;
+  password: string;
+  role: 'seller' | 'buyer';
+  name: {
     firstName: string;
     lastName: string;
-    address: string;
-    budget: number;
-    income: number;
-    createdAt: Date;
-    updatedAt: Date;
-  }
+  };
+  phoneNumber: string;
+  address: string;
+  budget: number;
+  income: number;
+};

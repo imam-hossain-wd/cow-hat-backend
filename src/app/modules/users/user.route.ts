@@ -4,8 +4,9 @@ import { userController } from "./user.controller";
 
 const router = Router();
 
-router.post('/create-user',userController.createUser);
+router.post('/singup',userController.createUser);
 router.get('/',userController.getAllUsers);
+router.get('/:id',userController.getSingleUser);
 
 
 
