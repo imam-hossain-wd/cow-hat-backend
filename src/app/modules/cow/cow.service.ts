@@ -14,7 +14,14 @@ const getAllCows = async ()=>{
     return cows
 }
 
+const getCowById = async (id:string)=>{
+    const result = await Cow.findOne({ _id: id });
+    return result;
+
+}
+
 export const cowService = {
   createCow,
-  getAllCows
+  getAllCows,
+  getCowById
 };
