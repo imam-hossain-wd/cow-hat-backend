@@ -8,6 +8,7 @@ export type IApiReponse<T> = {
   data?: T | null;
 };
 
+
 const sendReponse = <T>(res: Response, data: IApiReponse<T>): void => {
   const responseData: IApiReponse<T> = {
     statusCode: data.statusCode,
@@ -20,3 +21,6 @@ const sendReponse = <T>(res: Response, data: IApiReponse<T>): void => {
 };
 
 export default sendReponse;
+
+
+

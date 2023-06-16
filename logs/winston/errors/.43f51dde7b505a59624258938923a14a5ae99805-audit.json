@@ -39,6 +39,11 @@
             "date": 1686927611344,
             "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\caw-hat-2023-16-06-21-error.log",
             "hash": "015053fada50f20ad6ae62053c7de20d2826ab5daf052bda61f4e1473caa1b68"
+        },
+        {
+            "date": 1686931323160,
+            "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\caw-hat-2023-16-06-22-error.log",
+            "hash": "366c4ef3484f1f212a7e96cdcb69ca8de8507272dc9dbb8db872aaa4ed45a5ea"
         }
     ],
     "hashType": "sha256"

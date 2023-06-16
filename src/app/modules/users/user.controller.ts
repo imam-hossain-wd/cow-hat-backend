@@ -3,6 +3,7 @@ import { userService } from './user.service';
 import { IUser } from './user.interface';
 import httpStatus from 'http-status';
 import sendResponse from '../../../shared/sendResponse';
+import { errorlogger } from '../../../shared/logger';
 
 
 
@@ -41,7 +42,6 @@ const getAllUsers = async (req: Request, res: Response, next:NextFunction) => {
 const getSingleUser = async (req: Request, res: Response, next:NextFunction) => {
   try {
     const id = req.params.id 
-    console.log(id);
     const result = await userService.getSingleUser(id);
     sendResponse<IUser>(res, {
       statusCode: httpStatus.OK,
@@ -55,9 +55,48 @@ const getSingleUser = async (req: Request, res: Response, next:NextFunction) => 
   }
 };
 
+// const updateUser = async (req: Request, res: Response, next:NextFunction) => {
+//   try {
+//     const id = req.params.id;
+//     const updatedData = req.body;
+//     const result = await userService.updateUser(id, updatedData);
+
+//     sendResponse<IUser>(res, {
+//       statusCode: httpStatus.OK,
+//       success: true,
+//       message: "get all users successfully",
+//       data: result,
+//     });
+
+//   } catch (error) {
+//     next(error)
+//   }
+// };
+const deleteUser = (async (req: Request, res: Response, next:NextFunction) => {
+  try{
+    const id = req.params.id;
+
+  const result = await userService.deleteUser(id);
+
+  sendResponse<IUser>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User deleted successfully !',
+    data: result,
+  });
+
+  }
+  catch(error){
+    next(error)
+    errorlogger.error(error)
+  }
+});
+
 
 export const userController = {
   createUser,
   getAllUsers,
-  getSingleUser
+  getSingleUser,
+  // updateUser,
+  deleteUser
 };
