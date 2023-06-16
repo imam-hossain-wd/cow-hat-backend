@@ -11,3 +11,7 @@ http://localhost:5000/api/v1/users/648c754622a9f6a5fce281ad
 
 delete a user :
 http://localhost:5000/api/v1/users/648c7a04114828c007c99bfa
+
+create cow : http://localhost:5000/api/v1/cows/create-cow
+
+getAllCows: http://localhost:5000/api/v1/cows

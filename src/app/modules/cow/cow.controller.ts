@@ -18,7 +18,19 @@ const createCow = catchAsync(async (req:Request, res:Response)=>{
       });
 })
 
+const getAllCows = catchAsync(async(req:Request, res:Response)=>{
+    const result = await cowService.getAllCows();
+
+    sendReponse<ICow[]>(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'get all cows successfully!',
+        data: result,
+      });
+})
+
 
 export const cowController = {
-    createCow
+    createCow,
+    getAllCows
 }

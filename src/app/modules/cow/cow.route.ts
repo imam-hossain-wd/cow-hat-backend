@@ -4,6 +4,7 @@ import { cowController } from "./cow.controller";
 
 const router = Router();
 
-router.post('/create-cow', cowController.createCow)
+router.post('/create-cow', cowController.createCow);
+router.get('/', cowController.getAllCows);
 
 export default router;

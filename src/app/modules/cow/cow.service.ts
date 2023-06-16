@@ -9,6 +9,12 @@ const createCow = async (cowData: ICow) => {
   return result;
 };
 
+const getAllCows = async ()=>{
+    const cows = await Cow.find({});
+    return cows
+}
+
 export const cowService = {
   createCow,
+  getAllCows
 };
