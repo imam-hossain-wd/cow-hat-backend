@@ -1,5 +1,5 @@
 import { Schema, model, Types } from 'mongoose';
-import { Breed, Category, ICow, Label } from './cow.interface';
+import { Breed, Category, ICow, Label,Location } from './cow.interface';
 
 const cowSchema = new Schema<ICow>({
   name: { 

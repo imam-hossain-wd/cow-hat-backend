@@ -49,6 +49,11 @@
             "date": 1686931323154,
             "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\successes\\caw-hat-2023-16-06-22-success.log",
             "hash": "0baf4389300579eb2a98253c18844edf18fc84133872c658ad60f75178019f28"
+        },
+        {
+            "date": 1686941196368,
+            "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\successes\\caw-hat-2023-17-06-00-success.log",
+            "hash": "f1bf4b625c475dd593b71d17ed5deb70738fb926e31a35f73767a1d6dca9bd20"
         }
     ],
     "hashType": "sha256"
