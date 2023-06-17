@@ -6,39 +6,48 @@ import { IUser } from './user.interface';
 import { User } from './user.model';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import { IGenericResponse } from '../../../interfaces/common';
+import { paginationHelpers } from '../../../helpers/paginationHelper';
+import { SortOrder } from 'mongoose';
 
 const createUser = async (user: IUser): Promise<IUser | null> => {
   const createdUser = await User.create(user);
   return createdUser;
 };
 
+const getAllUsers = async (
+  paginationOptions: IPaginationOptions
+): Promise<IGenericResponse<IUser[]>> => {
 
+  const { page, limit, skip, sortBy, sortOrder } =
+    paginationHelpers.calculatePagination(paginationOptions);
 
-const getAllUsers = async (paginationOptions:IPaginationOptions) : Promise<IGenericResponse<IUser[]>> => {
-  const {page=1, limit=10} = paginationOptions;
-  const skip = (page -1) * limit;
-  const allUsers = await User.find().sort().skip(skip).limit(limit);
+    const sortConditions : {[key:string]: SortOrder}= {};
+    if(sortBy && sortOrder){
+      sortConditions[sortBy]= sortOrder;
+    }
 
-  if(allUsers.length === 0){
-    throw new ApiError(httpStatus.NOT_FOUND, "There is no user found")
-}
+  const allUsers = await User.find().sort(sortConditions).skip(skip).limit(limit);
 
-const total = await User.countDocuments();
+  if (allUsers.length === 0) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'There is no user found');
+  }
+
+  const total = await User.countDocuments();
 
   return {
-    meta:{
+    meta: {
       page,
       limit,
-      total
+      total,
     },
-    data: allUsers
-  }
+    data: allUsers,
+  };
 };
 
 const getSingleUser = async (id: string): Promise<IUser | null> => {
-  const isexits = await User.findOne({_id: id})
-  if(!isexits){
-    throw new ApiError(httpStatus.NOT_FOUND, "user is not found")
+  const isexits = await User.findOne({ _id: id });
+  if (!isexits) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'user is not found');
   }
   const singleUser = await User.findOne({ _id: id });
   return singleUser;
@@ -59,7 +68,7 @@ const getSingleUser = async (id: string): Promise<IUser | null> => {
 // };
 
 const deleteUser = async (id: string): Promise<IUser | null> => {
-  const result = await User.findByIdAndDelete(id)
+  const result = await User.findByIdAndDelete(id);
   return result;
 };
 
@@ -67,6 +76,6 @@ export const userService = {
   createUser,
   getAllUsers,
   getSingleUser,
-  deleteUser
+  deleteUser,
   // updateUser,
 };
