@@ -4,18 +4,35 @@ import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
 import { IUser } from './user.interface';
 import { User } from './user.model';
+import { IPaginationOptions } from '../../../interfaces/pagination';
+import { IGenericResponse } from '../../../interfaces/common';
 
 const createUser = async (user: IUser): Promise<IUser | null> => {
   const createdUser = await User.create(user);
   return createdUser;
 };
 
-const getAllUsers = async () => {
-  const allUsers = await User.find({});
+
+
+const getAllUsers = async (paginationOptions:IPaginationOptions) : Promise<IGenericResponse<IUser[]>> => {
+  const {page=1, limit=10} = paginationOptions;
+  const skip = (page -1) * limit;
+  const allUsers = await User.find().sort().skip(skip).limit(limit);
+
   if(allUsers.length === 0){
     throw new ApiError(httpStatus.NOT_FOUND, "There is no user found")
 }
-  return allUsers;
+
+const total = await User.countDocuments();
+
+  return {
+    meta:{
+      page,
+      limit,
+      total
+    },
+    data: allUsers
+  }
 };
 
 const getSingleUser = async (id: string): Promise<IUser | null> => {

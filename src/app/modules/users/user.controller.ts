@@ -4,6 +4,8 @@ import { IUser } from './user.interface';
 import httpStatus from 'http-status';
 import sendResponse from '../../../shared/sendResponse';
 import catchAsync from '../../../shared/catchAsync';
+import pick from '../../../shared/pick';
+import { paginationFields } from '../../../constants/paginations';
 
 const createUser: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
@@ -19,14 +21,19 @@ const createUser: RequestHandler = catchAsync(
   }
 );
 
+
 const getAllUsers = catchAsync(async (req: Request, res: Response) => {
-  const result = await userService.getAllUsers();
+  const paginationOptions = pick(req.query, paginationFields);
+  console.log(paginationOptions);
+
+  const result = await userService.getAllUsers(paginationOptions);
 
   sendResponse<IUser[]>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'get all users successfully',
-    data: result,
+    meta: result.meta,
+    data: result.data
   });
 });
 
