@@ -1,8 +1,6 @@
-// import httpStatus from 'http-status';
-// import ApiError from '../../../errors/ApiError';
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
-import { IUser } from './user.interface';
+import { IUser} from './user.interface';
 import { User } from './user.model';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import { IGenericResponse } from '../../../interfaces/common';
@@ -14,35 +12,65 @@ const createUser = async (user: IUser): Promise<IUser | null> => {
   return createdUser;
 };
 
+type IuserSearchableFeilds = {
+  searchTerm?: string;
+};
+
 const getAllUsers = async (
-  paginationOptions: IPaginationOptions
-): Promise<IGenericResponse<IUser[]>> => {
+  paginationOptions: IPaginationOptions, filters:IuserSearchableFeilds): Promise<IGenericResponse<IUser[]>> => {
 
-  const { page, limit, skip, sortBy, sortOrder } =
-    paginationHelpers.calculatePagination(paginationOptions);
-
-    const sortConditions : {[key:string]: SortOrder}= {};
-    if(sortBy && sortOrder){
-      sortConditions[sortBy]= sortOrder;
+    const {searchTerm, ...filtersData} = filters;
+    const userSearchableFeilds = ['income', 'address', '_id']
+    const andConditions = [];
+  
+    if (searchTerm) {
+      andConditions.push({
+        $or: userSearchableFeilds.map(field => ({
+          [field]: {
+            $regex: searchTerm,
+            $options: 'i',
+          },
+        })),
+      });
+    }
+    
+    if (Object.keys(filtersData).length) {
+      andConditions.push({
+        $and: Object.entries(filtersData).map(([field, value]) => ({
+          [field]: value,
+        })),
+      });
     }
 
-  const allUsers = await User.find().sort(sortConditions).skip(skip).limit(limit);
+    const { page, limit, skip, sortBy, sortOrder } =
+    paginationHelpers.calculatePagination(paginationOptions);
 
-  if (allUsers.length === 0) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'There is no user found');
-  }
+    const sortConditions: { [key: string]: SortOrder } = {};
 
-  const total = await User.countDocuments();
+    if (sortBy && sortOrder) {
+      sortConditions[sortBy] = sortOrder;
+    }
 
-  return {
-    meta: {
-      page,
-      limit,
-      total,
-    },
-    data: allUsers,
-  };
+    const whereConditions =
+      andConditions.length > 0 ? { $and: andConditions } : {};
+  
+    const result = await User.find(whereConditions)
+      .sort(sortConditions)
+      .skip(skip)
+      .limit(limit);
+    const total = await User.countDocuments();
+  
+    return {
+      meta: {
+        page,
+        limit,
+        total,
+      },
+      data: result,
+    };
 };
+
+
 
 const getSingleUser = async (id: string): Promise<IUser | null> => {
   const isexits = await User.findOne({ _id: id });

@@ -19,3 +19,7 @@ getAllCows: http://localhost:5000/api/v1/cows
 getCowById : http://localhost:5000/api/v1/cows/648cae8c41a8d64b7bd00a70
 
 deleteCow : http://localhost:5000/api/v1/cows/648cb7d5bda4ea20ef4e3f0f
+
+page-limit : http://localhost:5000/api/v1/users/?page=1&limit=2
+
+page-limit-skip-sort : http://localhost:5000/api/v1/users/?page=1&limit=2&sortBy=income&sortOrder=desc

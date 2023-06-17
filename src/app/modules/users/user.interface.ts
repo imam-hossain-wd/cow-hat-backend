@@ -1,6 +1,5 @@
 
 export type IUser = {
-  // _id: string;
   password: string;
   role: 'seller' | 'buyer';
   name: {
@@ -12,3 +11,7 @@ export type IUser = {
   budget: number;
   income: number;
 };
+
+export type IUserFilters = {
+  searchTerm : string ;
+}

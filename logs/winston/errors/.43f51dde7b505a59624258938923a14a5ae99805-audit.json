@@ -64,6 +64,31 @@
             "date": 1686978052618,
             "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\caw-hat-2023-17-06-11-error.log",
             "hash": "a1e94747298b32090d940047457397082ed99edc7430eaa63f9439731b428013"
+        },
+        {
+            "date": 1686983627760,
+            "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\caw-hat-2023-17-06-12-error.log",
+            "hash": "0d78980d0d68774787c85da7bead23b6bcf0e503cdb7ce6d580c676dbed2fea6"
+        },
+        {
+            "date": 1686989130216,
+            "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\caw-hat-2023-17-06-14-error.log",
+            "hash": "269754abdc8aab6323a741862ef1aa78356b1e1291a7b4a31a98a476108323ba"
+        },
+        {
+            "date": 1686996099981,
+            "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\caw-hat-2023-17-06-16-error.log",
+            "hash": "746476dacd5a34d0f3cd6ae4e392629684b155dec11ecd00b3c715dbc32e7d0b"
+        },
+        {
+            "date": 1687009790110,
+            "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\caw-hat-2023-17-06-19-error.log",
+            "hash": "6238fd4378e04193f5ecf457a0f214b6ffc8f6b2472e3cacd2bf2f565d0d76c0"
+        },
+        {
+            "date": 1687012575196,
+            "name": "C:\\Users\\mdemr\\Desktop\\cow-hut-backend-assignment-3\\logs\\winston\\errors\\caw-hat-2023-17-06-20-error.log",
+            "hash": "6e13e38dc5664c71e3240261f1c6acc9375017bcd8382838669fd0f40d345080"
         }
     ],
     "hashType": "sha256"
