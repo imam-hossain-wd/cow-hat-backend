@@ -1,6 +1,6 @@
 
 
-enum Location {
+enum location {
   Dhaka = 'Dhaka',
   Chattogram = 'Chattogram',
   Barishal = 'Barishal',
@@ -31,6 +31,18 @@ enum Category {
   Beef = 'Beef',
   DualPurpose = 'Dual Purpose',
 }
+enum SortOrder {
+  Asc = 'asc',
+  Desc = 'desc',
+  None = 'none',
+}
+
+type IPaginationOptions ={
+  page: number;
+  limit: number;
+  sortBy?: string;
+  sortOrder?: SortOrder | undefined;
+}
 
  type ICow = {
   name: string;
@@ -44,4 +56,4 @@ enum Category {
   seller: string; 
 }
 
-export { ICow, Location, Breed, Label, Category };
+export { ICow, location, Breed, Label, Category, IPaginationOptions };

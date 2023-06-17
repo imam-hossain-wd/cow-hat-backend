@@ -9,25 +9,30 @@ const userSchema = new Schema<IUser>({
   password: {
     type: String,
     required: true,
+    unique:true
   },
   role: {
     type: String,
     enum: ['seller', 'buyer'],
     required: true,
+    
   },
   name: {
     firstName: {
       type: String,
       required: true,
+      
     },
     lastName: {
       type: String,
       required: true,
+      unique:true
     },
   },
   phoneNumber: {
     type: String,
     required: true,
+    unique:true
   },
   address: {
     type: String,

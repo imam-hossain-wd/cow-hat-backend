@@ -3,6 +3,10 @@ import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
 import { ICow } from './cow.interface';
 import Cow from './cow.model';
+import { IPaginationOptions } from '../../../interfaces/pagination';
+import { IGenericResponse } from '../../../interfaces/common';
+import { paginationHelpers } from '../../../helpers/paginationHelper';
+import { SortOrder } from 'mongoose';
 
 
 
@@ -11,14 +15,88 @@ const createCow = async (cowData: ICow) => {
   return result;
 };
 
-const getAllCows = async ()=>{
 
-    const cows = await Cow.find({});
-    if(cows.length === 0){
-        throw new ApiError(httpStatus.NOT_FOUND, "There is no cow found")
-    }
-    return cows
-}
+const cowSearchableFields = ['location', 'breed', 'category'];
+
+type CowFilterableFields = {
+  searchTerm?: string;
+  location?: string;
+  minPrice?: number;
+  maxPrice?: number;
+};
+
+const getAllCows = async (
+  paginationOptions: IPaginationOptions,
+  filters: CowFilterableFields
+): Promise<IGenericResponse<ICow[]>> => {
+  const { page, limit, skip, sortBy, sortOrder } = paginationHelpers.calculatePagination(paginationOptions);
+
+  const andConditions = [];
+
+  if (filters.searchTerm) {
+    andConditions.push({
+      $or: cowSearchableFields.map((field) => ({
+        [field]: {
+          $regex: filters.searchTerm,
+          $options: 'i',
+        },
+      })),
+    });
+  }
+
+  if (filters.minPrice !== undefined && filters.maxPrice !== undefined) {
+    andConditions.push({
+      price: {
+        $gte: filters.minPrice,
+        $lte: filters.maxPrice,
+      },
+    });
+  } else if (filters.minPrice !== undefined) {
+    andConditions.push({
+      price: {
+        $gte: filters.minPrice,
+      },
+    });
+  } else if (filters.maxPrice !== undefined) {
+    andConditions.push({
+      price: {
+        $lte: filters.maxPrice,
+      },
+    });
+  }
+
+  if (filters.location) {
+    andConditions.push({
+      location: filters.location,
+    });
+  }
+
+  const whereConditions = andConditions.length > 0 ? { $and: andConditions } : {};
+
+  const sortConditions: { [key: string]: SortOrder } = {};
+
+  if (sortBy && sortOrder) {
+    sortConditions[sortBy] = sortOrder;
+  }
+
+  const [data, total] = await Promise.all([
+    Cow.find(whereConditions)
+      .sort(sortConditions)
+      .skip(skip)
+      .limit(limit),
+    Cow.countDocuments(whereConditions),
+  ]);
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data,
+  };
+};
+
 
 const getCowById = async (id:string)=>{
 

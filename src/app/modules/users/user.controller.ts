@@ -25,14 +25,10 @@ const createUser: RequestHandler = catchAsync(
 
 
 const getAllUsers = catchAsync(async (req: Request, res: Response) => {
-
   const filters = pick(req.query,['searchTerm', 'income', 'address', '_id'])
-
   const paginationOptions = pick(req.query, paginationFields);
   console.log(paginationOptions);
-
   const result = await userService.getAllUsers(paginationOptions, filters);
-
 
   sendResponse<IUser[]>(res, {
     statusCode: httpStatus.OK,
