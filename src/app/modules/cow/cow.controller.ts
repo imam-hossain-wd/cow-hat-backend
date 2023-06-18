@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 import { Request, Response } from 'express';
 import catchAsync from '../../../shared/catchAsync';
 import { cowService } from './cow.service';
 import sendResponse from '../../../shared/sendResponse';
 import { ICow} from './cow.interface';
 import httpStatus from 'http-status';
-import { paginationFields } from '../../../constants/paginations';
+// import { paginationFields } from '../../../constants/paginations';
 
 
 
@@ -20,11 +22,17 @@ const createCow = catchAsync(async (req: Request, res: Response) => {
 });
 
 
-
 const getAllCows = async (req: Request, res: Response) => {
   const { page, limit, sortBy, sortOrder, minPrice, maxPrice, location, searchTerm } = req.query;
 
-  const paginationOptions: paginationFields = {
+  type IPaginationOptions = {
+    page?: number;
+    limit?: number;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+  };
+
+  const paginationOptions: IPaginationOptions = {
     page: page ? parseInt(page as string, 10) : 1,
     limit: limit ? parseInt(limit as string, 10) : 10,
     sortBy: sortBy as string,

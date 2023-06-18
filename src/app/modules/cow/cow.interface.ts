@@ -1,6 +1,7 @@
+import mongoose from "mongoose";
 
 
-enum location {
+enum Location {
   Dhaka = 'Dhaka',
   Chattogram = 'Chattogram',
   Barishal = 'Barishal',
@@ -53,7 +54,7 @@ type IPaginationOptions ={
   weight: number;
   label: Label;
   category: Category;
-  seller: string; 
+  seller: mongoose.Types.ObjectId; 
 }
 
-export { ICow, location, Breed, Label, Category, IPaginationOptions };
+export { ICow, Location, Breed, Label, Category, IPaginationOptions };

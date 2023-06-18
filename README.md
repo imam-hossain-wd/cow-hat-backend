@@ -56,3 +56,5 @@ http://localhost:5000/api/v1/cows/?searchTerm=Cha
 //order
 create-order : http://localhost:5000/api/v1/orders
 
+get-all-orders : http://localhost:5000/api/v1/orders
+

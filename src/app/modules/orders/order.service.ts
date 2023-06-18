@@ -1,37 +1,67 @@
-import { Types } from 'mongoose';
-import IOrder from './order.interface';
-import Order from './order.model';
-import Cow from '../cow/cow.model';
 
+import Cow from "../cow/cow.model";
+import { User } from "../users/user.model";
+import { Types } from "mongoose";
+import Order from './order.model';
+import { Label } from '../cow/cow.interface';
+import IOrder from './order.interface';
+
+//: Promise<IOrder>
 
 const createOrder = async (
-  cow: Types.ObjectId,
-  buyer: Types.ObjectId
-): Promise<IOrder> => {
-  const availableCow = await Cow.findOne({ _id: cow, label: 'for sale' });
+  cowId: Types.ObjectId,
+  buyerId: Types.ObjectId
+) => {  
+    const cow = await Cow.findById(cowId);
+    const buyer = await User.findById(buyerId);
+  
+    if (!cow) {
+      throw new Error('Cow not found');
+    }
+    if (!buyer) {
+      throw new Error('Buyer not found');
+    }
+    if (buyer.budget < cow.price) {
+      throw new Error("Can't Buy! Insufficient budget")
+    }
+  const session = await Order.startSession();
 
-  if (!availableCow) {
-    throw new Error('The requested cow is not available for sale.');
+  session.startTransaction();
+
+  try {
+    cow.label = Label.SoldOut;
+    await cow.save();
+
+    buyer.budget -= cow.price;
+    await buyer.save();
+
+    const seller = await User.findById(cow.seller);
+    if (seller) {
+      seller.income += cow.price;
+      await seller.save();
+    }
+
+    const order: IOrder = await Order.create({ cow: cowId, buyer: buyerId });
+
+    await session.commitTransaction();
+    session.endSession();
+
+    return order;
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    throw error;
   }
-
-
-//   const session = await Order.startSession();
-//   session.startTransaction();
-
-//   try {
-    await Cow.findByIdAndUpdate(cow, { label: 'sold out' });
-    const newOrder = await Order.create({ cow, buyer });
-    // await session.commitTransaction();
-
-    return newOrder;
-//   } catch (error) {
-//     await session.abortTransaction();
-//     throw error;
-//   } finally {
-//     session.endSession();
-//   }
+  
 };
 
-export const ordersService = {
+const getOrders = async ()=> {
+  const orders = await Order.find({})
+  return orders;
+}
+
+
+export const orderService ={
   createOrder,
-};
+  getOrders
+}
