@@ -1,4 +1,4 @@
-import { Request, Response, RequestHandler } from 'express';
+import { Request, Response, RequestHandler, NextFunction } from 'express';
 import { userService } from './user.service';
 import { IUser} from './user.interface';
 import httpStatus from 'http-status';
@@ -50,23 +50,24 @@ const getSingleUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-// const updateUser = async (req: Request, res: Response, next:NextFunction) => {
-//   try {
-//     const id = req.params.id;
-//     const updatedData = req.body;
-//     const result = await userService.updateUser(id, updatedData);
+const updateUser = async (req: Request, res: Response, next:NextFunction) => {
 
-//     sendResponse<IUser>(res, {
-//       statusCode: httpStatus.OK,
-//       success: true,
-//       message: "get all users successfully",
-//       data: result,
-//     });
+  try {
+    const id = req.params.id;
+    const updatedData = req.body;
+    const result = await userService.updateUser(id, updatedData);
+    sendResponse<IUser>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "get all users successfully",
+      data: result,
+    });
 
-//   } catch (error) {
-//     next(error)
-//   }
-// };
+  } catch (error) {
+    next(error)
+  }
+};
+
 const deleteUser = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
   const result = await userService.deleteUser(id);
@@ -83,6 +84,6 @@ export const userController = {
   createUser,
   getAllUsers,
   getSingleUser,
-  // updateUser,
+  updateUser,
   deleteUser,
 };

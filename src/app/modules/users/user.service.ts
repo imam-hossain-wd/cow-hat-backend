@@ -1,6 +1,6 @@
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
-import { IUser} from './user.interface';
+import { IUser } from './user.interface';
 import { User } from './user.model';
 import { IPaginationOptions } from '../../../interfaces/pagination';
 import { IGenericResponse } from '../../../interfaces/common';
@@ -17,60 +17,59 @@ type IuserSearchableFeilds = {
 };
 
 const getAllUsers = async (
-  paginationOptions: IPaginationOptions, filters:IuserSearchableFeilds): Promise<IGenericResponse<IUser[]>> => {
+  paginationOptions: IPaginationOptions,
+  filters: IuserSearchableFeilds
+): Promise<IGenericResponse<IUser[]>> => {
+  const { searchTerm, ...filtersData } = filters;
+  const userSearchableFeilds = ['income', 'address', '_id'];
+  const andConditions = [];
 
-    const {searchTerm, ...filtersData} = filters;
-    const userSearchableFeilds = ['income', 'address', '_id']
-    const andConditions = [];
-  
-    if (searchTerm) {
-      andConditions.push({
-        $or: userSearchableFeilds.map(field => ({
-          [field]: {
-            $regex: searchTerm,
-            $options: 'i',
-          },
-        })),
-      });
-    }
-    
-    if (Object.keys(filtersData).length) {
-      andConditions.push({
-        $and: Object.entries(filtersData).map(([field, value]) => ({
-          [field]: value,
-        })),
-      });
-    }
+  if (searchTerm) {
+    andConditions.push({
+      $or: userSearchableFeilds.map(field => ({
+        [field]: {
+          $regex: searchTerm,
+          $options: 'i',
+        },
+      })),
+    });
+  }
 
-    const { page, limit, skip, sortBy, sortOrder } =
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    });
+  }
+
+  const { page, limit, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(paginationOptions);
 
-    const sortConditions: { [key: string]: SortOrder } = {};
+  const sortConditions: { [key: string]: SortOrder } = {};
 
-    if (sortBy && sortOrder) {
-      sortConditions[sortBy] = sortOrder;
-    }
+  if (sortBy && sortOrder) {
+    sortConditions[sortBy] = sortOrder;
+  }
 
-    const whereConditions =
-      andConditions.length > 0 ? { $and: andConditions } : {};
-  
-    const result = await User.find(whereConditions)
-      .sort(sortConditions)
-      .skip(skip)
-      .limit(limit);
-    const total = await User.countDocuments();
-  
-    return {
-      meta: {
-        page,
-        limit,
-        total,
-      },
-      data: result,
-    };
+  const whereConditions =
+    andConditions.length > 0 ? { $and: andConditions } : {};
+
+  const result = await User.find(whereConditions)
+    .sort(sortConditions)
+    .skip(skip)
+    .limit(limit);
+  const total = await User.countDocuments();
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: result,
+  };
 };
-
-
 
 const getSingleUser = async (id: string): Promise<IUser | null> => {
   const isexits = await User.findOne({ _id: id });
@@ -81,19 +80,21 @@ const getSingleUser = async (id: string): Promise<IUser | null> => {
   return singleUser;
 };
 
-// const updateUser = async (id: string, updatedData: IUser) => {
-//   const isExist = await User.findOne({ id });
-//   console.log(isExist , updateUser);
+const updateUser = async (
+  id: string,
+  payload: Partial<IUser>
+): Promise<IUser | null> => {
+  const isExist = await User.findOne({ _id: id });
+  console.log(isExist, updateUser);
+  if (!isExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'user not found !');
+  }
 
-//   if (!isExist) {
-//     throw new ApiError(httpStatus.NOT_FOUND, 'user not found !');
-//   }
-//   const result = await User.findOneAndUpdate(id, updatedData, {
-//     new: true
-//   });
-//   return result;
-
-// };
+  const result = await User.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+  return result;
+};
 
 const deleteUser = async (id: string): Promise<IUser | null> => {
   const result = await User.findByIdAndDelete(id);
@@ -105,5 +106,5 @@ export const userService = {
   getAllUsers,
   getSingleUser,
   deleteUser,
-  // updateUser,
+  updateUser,
 };
