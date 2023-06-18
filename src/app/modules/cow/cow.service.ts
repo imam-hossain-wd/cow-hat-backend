@@ -109,6 +109,21 @@ const getCowById = async (id:string)=>{
 
 }
 
+const updateCow = async (
+  id: string,
+  payload: Partial<ICow>
+): Promise<ICow | null> => {
+  const isExist = await Cow.findOne({ _id: id });
+  if (!isExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'cow not found !');
+  }
+
+  const result = await Cow.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+  return result;
+};
+
 const deleteCow = async (id: string): Promise<ICow | null> => {
     const result = await Cow.findByIdAndDelete(id)
     return result;
@@ -118,5 +133,6 @@ export const cowService = {
   createCow,
   getAllCows,
   getCowById,
-  deleteCow
+  deleteCow,
+  updateCow
 };
