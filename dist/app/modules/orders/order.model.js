@@ -12,10 +12,6 @@ const orderSchema = new mongoose_1.Schema({
         ref: 'User',
         required: true,
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
 }, {
     timestamps: true,
 });

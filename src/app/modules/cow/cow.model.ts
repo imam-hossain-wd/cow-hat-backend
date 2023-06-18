@@ -38,11 +38,6 @@ const cowSchema = new Schema<ICow>({
     enum: Object.values(Category),
     required: true
   },
-  // seller: {
-  //   type: mongoose.Types.ObjectId,
-  //   ref: 'User',
-  //   required: true
-  // },
   seller: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 });
 

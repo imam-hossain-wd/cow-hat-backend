@@ -6,8 +6,6 @@ import { cowService } from './cow.service';
 import sendResponse from '../../../shared/sendResponse';
 import { ICow} from './cow.interface';
 import httpStatus from 'http-status';
-// import { paginationFields } from '../../../constants/paginations';
-
 
 
 const createCow = catchAsync(async (req: Request, res: Response) => {

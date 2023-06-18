@@ -1,6 +1,5 @@
 import { ErrorRequestHandler } from 'express';
 import config from '../../config';
-import { errorlogger } from '../../shared/logger';
 import { IGenericErrorMessage } from '../../interfaces/errors';
 import handleValidationError from '../../errors/handleValidationError';
 import ApiError from '../../errors/ApiError';
@@ -25,7 +24,6 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;
-    console.log('cast error........', statusCode, message, errorMessages);
   } else if (error instanceof ApiError) {
     statusCode = error?.statusCode;
     message = error.message;
@@ -59,4 +57,8 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   next();
 };
 
+
 export default globalErrorHandler;
+
+
+

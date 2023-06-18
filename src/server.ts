@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import app from './app';
 import config from './config/index';
-import { errorlogger, logger } from './shared/logger';
+
 
 const { port, database_url } = config;
 
