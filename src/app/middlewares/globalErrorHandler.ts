@@ -9,7 +9,7 @@ import handleCastError from '../../errors/handleCastError';
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   config.env === 'development'
     ? console.log(` globalErrorHandler ~~`, error)
-    : errorlogger.error(` globalErrorHandler ~~`, error);
+    : console.log(` globalErrorHandler ~~`, error);
 
   let statusCode = 500;
   let message = 'Something went wrong !';
@@ -20,15 +20,13 @@ const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;
-  } 
-  else if (error?.name === 'CastError') {
+  } else if (error?.name === 'CastError') {
     const simplifiedError = handleCastError(error);
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;
-    console.log('cast error........',statusCode,message,errorMessages);
-  }
-  else if (error instanceof ApiError) {
+    console.log('cast error........', statusCode, message, errorMessages);
+  } else if (error instanceof ApiError) {
     statusCode = error?.statusCode;
     message = error.message;
     errorMessages = error?.message

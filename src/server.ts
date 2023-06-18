@@ -9,13 +9,13 @@ const run = async () => {
   try {
     await mongoose
       .connect(database_url as string)
-      .then(() => logger.info('database connected successfully'));
+      .then(() => console.log('database connected successfully'));
 
     app.listen(port, () => {
-      logger.info(`server is running on port ${port}`);
+      console.log(`server is running on port ${port}`);
     });
   } catch (error) {
-    errorlogger.error(error);
+    console.log(error);
   }
 };
-run().catch(error => errorlogger.error(error));
+run().catch(error => console.log(error));
