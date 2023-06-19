@@ -6,55 +6,55 @@ create user :
 http://localhost:5000/api/v1/auth/singup
 
 get all users :
-http://localhost:5000/api/v1/users
+https://cow-hat-backend-ten.vercel.app/api/v1/users
 
 get single user with id :
-http://localhost:5000/api/v1/users/648c754622a9f6a5fce281ad
+https://cow-hat-backend-ten.vercel.app/api/v1/users/648c754622a9f6a5fce281ad
 
 delete a user :
-http://localhost:5000/api/v1/users/648c7a04114828c007c99bfa
+https://cow-hat-backend-ten.vercel.app/api/v1/users/648c7a04114828c007c99bfa
 
-updateUser : http://localhost:5000/api/v1/users/648d4978be3cc8815a28fd8b
+updateUser : https://cow-hat-backend-ten.vercel.app/api/v1/users/648d4978be3cc8815a28fd8b
 
 // users pagination search filter
 
-page-limit : http://localhost:5000/api/v1/users/?page=1&limit=2
+page-limit : https://cow-hat-backend-ten.vercel.app/api/v1/users/?page=1&limit=2
 
-page-limit-skip-sort : http://localhost:5000/api/v1/users/?page=1&limit=2&sortBy=income&sortOrder=desc
+page-limit-skip-sort : https://cow-hat-backend-ten.vercel.app/api/v1/users/?page=1&limit=2&sortBy=income&sortOrder=desc
 
-search-filter-limit-sort : http://localhost:5000/api/v1/users/?address=dhaka&limit=5&sortBy=income&sortOrder=asc
+search-filter-limit-sort : https://cow-hat-backend-ten.vercel.app/api/v1/users/?address=dhaka&limit=5&sortBy=income&sortOrder=asc
 
 
 //cow 
 
-create cow : http://localhost:5000/api/v1/cows/create-cow
+create cow : https://cow-hat-backend-ten.vercel.app/api/v1/cows/create-cow
 
-getAllCows: http://localhost:5000/api/v1/cows
+getAllCows: https://cow-hat-backend-ten.vercel.app/api/v1/cows
 
-getCowById : http://localhost:5000/api/v1/cows/648cae8c41a8d64b7bd00a70
+getCowById : https://cow-hat-backend-ten.vercel.app/api/v1/cows/648cae8c41a8d64b7bd00a70
 
-updateCow : http://localhost:5000/api/v1/cows/update/648de7282ce05c4cfeed866c
+updateCow : https://cow-hat-backend-ten.vercel.app/api/v1/cows/update/648de7282ce05c4cfeed866c
 
-deleteCow : http://localhost:5000/api/v1/cows/648cb7d5bda4ea20ef4e3f0f
+deleteCow : https://cow-hat-backend-ten.vercel.app/api/v1/cows/648cb7d5bda4ea20ef4e3f0f
 
 
 
 
 //cow pagination
 
-http://localhost:5000/api/v1/cows/?page=1&limit=10
+https://cow-hat-backend-ten.vercel.app/api/v1/cows/?page=1&limit=10
 
-http://localhost:5000/api/v1/cows/?sortBy=price&sortOrder=asc
+https://cow-hat-backend-ten.vercel.app/api/v1/cows/?sortBy=price&sortOrder=asc
 
-http://localhost:5000/api/v1/cows/?minPrice=20000&maxPrice=70000
+https://cow-hat-backend-ten.vercel.app/api/v1/cows/?minPrice=20000&maxPrice=70000
 
-http://localhost:5000/api/v1/cows/?location=Dhaka
+https://cow-hat-backend-ten.vercel.app/api/v1/cows/?location=Dhaka
 
-http://localhost:5000/api/v1/cows/?searchTerm=Cha
+https://cow-hat-backend-ten.vercel.app/api/v1/cows/?searchTerm=Cha
 
 
 //order
-create-order : http://localhost:5000/api/v1/orders
+create-order : https://cow-hat-backend-ten.vercel.app/api/v1/orders
 
-get-all-orders : http://localhost:5000/api/v1/orders
+get-all-orders : https://cow-hat-backend-ten.vercel.app/api/v1/orders
 

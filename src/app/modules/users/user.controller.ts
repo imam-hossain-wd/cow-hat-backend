@@ -11,7 +11,7 @@ import { paginationFields } from '../../../constants/paginations';
 
 const createUser: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
-    const user = req.body;
+     const user = req.body;
     const result = await userService.createUser(user);
 
     sendResponse<IUser>(res, {
@@ -19,7 +19,7 @@ const createUser: RequestHandler = catchAsync(
       success: true,
       message: 'user created successfully!',
       data: result,
-    });
+    })
   }
 );
 

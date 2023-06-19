@@ -25,7 +25,6 @@ const globalErrorHandler = (error, req, res, next) => {
         statusCode = simplifiedError.statusCode;
         message = simplifiedError.message;
         errorMessages = simplifiedError.errorMessages;
-        console.log('cast error........', statusCode, message, errorMessages);
     }
     else if (error instanceof ApiError_1.default) {
         statusCode = error?.statusCode;

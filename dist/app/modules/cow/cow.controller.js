@@ -9,7 +9,6 @@ const catchAsync_1 = __importDefault(require("../../../shared/catchAsync"));
 const cow_service_1 = require("./cow.service");
 const sendResponse_1 = __importDefault(require("../../../shared/sendResponse"));
 const http_status_1 = __importDefault(require("http-status"));
-// import { paginationFields } from '../../../constants/paginations';
 const createCow = (0, catchAsync_1.default)(async (req, res) => {
     const cowData = req.body;
     const createdCow = await cow_service_1.cowService.createCow(cowData);

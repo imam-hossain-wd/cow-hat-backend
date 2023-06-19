@@ -117,7 +117,6 @@ const updateCow = async (
   if (!isExist) {
     throw new ApiError(httpStatus.NOT_FOUND, 'cow not found !');
   }
-
   const result = await Cow.findOneAndUpdate({ _id: id }, payload, {
     new: true,
   });

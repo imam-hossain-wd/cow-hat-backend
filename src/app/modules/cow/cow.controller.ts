@@ -49,7 +49,7 @@ const getAllCows = async (req: Request, res: Response) => {
   sendResponse<ICow[]>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Get all cows successfully!',
+    message: 'Get cow successfully!',
     meta: result.meta,
     data: result.data,
   });
@@ -65,7 +65,7 @@ const getCowById = catchAsync(async (req: Request, res: Response) => {
   sendResponse<ICow>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'get all cows successfully!',
+    message: 'get cow by id successfully!',
     data: result,
   });
 });

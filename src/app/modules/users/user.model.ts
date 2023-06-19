@@ -11,12 +11,14 @@ const userSchema = new Schema<IUser>({
     type: String,
     enum: ['seller', 'buyer'],
     required: true,
+    unique:true
     
   },
   name: {
     firstName: {
       type: String,
       required: true,
+      unique:true
       
     },
     lastName: {

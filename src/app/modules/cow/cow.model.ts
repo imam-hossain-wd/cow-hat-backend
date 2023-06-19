@@ -4,7 +4,8 @@ import { Breed, Category, ICow, Label, Location } from './cow.interface';
 const cowSchema = new Schema<ICow>({
   name: {
     type: String,
-    required: true
+    required: true,
+    unique:true
   },
   age: {
     type: Number,

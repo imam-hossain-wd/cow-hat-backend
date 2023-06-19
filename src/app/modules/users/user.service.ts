@@ -7,10 +7,15 @@ import { IGenericResponse } from '../../../interfaces/common';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { SortOrder } from 'mongoose';
 
+
 const createUser = async (user: IUser): Promise<IUser | null> => {
+  if (user.role === 'seller') {
+    user.income = 0;
+  }
   const createdUser = await User.create(user);
   return createdUser;
 };
+
 
 type IuserSearchableFeilds = {
   searchTerm?: string;

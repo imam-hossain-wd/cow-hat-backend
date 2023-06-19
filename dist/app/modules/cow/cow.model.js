@@ -62,11 +62,6 @@ const cowSchema = new mongoose_1.Schema({
         enum: Object.values(cow_interface_1.Category),
         required: true
     },
-    // seller: {
-    //   type: mongoose.Types.ObjectId,
-    //   ref: 'User',
-    //   required: true
-    // },
     seller: { type: mongoose_1.default.Schema.Types.ObjectId, ref: 'User', required: true },
 });
 const Cow = (0, mongoose_1.model)('Cow', cowSchema);
